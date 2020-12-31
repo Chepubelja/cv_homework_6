@@ -126,7 +126,7 @@ To test whether Data Augmentation can improve model's performance and introduce 
 
 ### Observations:
 
-- *__Data augmentation is probably the most important stage__, and carefully selected types of augmentation can improve performance a lot.
+- *__Data augmentation is probably the most important stage__, and carefully selected types of augmentation can improve performance a lot.*
 
 ## Experiment №4 [e0004-e0005] With / without Batch Normalization
 
@@ -393,7 +393,7 @@ To test how much we can improve our test accuracy against the results of the van
 </p>
 
 ### Observations:
-- Selecting the right number of epochs to drop learning rate and drop rate are also important while improving model's performance.
+- *Selecting the right number of epochs to drop learning rate and drop rate are also important while improving model's performance.*
 
 ## Summary
 
