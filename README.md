@@ -63,8 +63,8 @@ To test how well perform models with different complexities on CIFAR-10.
 
 ### Observations:
 
-- Vanilla AlexNet outperforms other 2 models.
-- Resnet18 is too complex model for this dataset, thus rapidly overfits on train and performs poorly on test. It possibly may be used for CIFAR, but needs more regularization (both implicit and explicit).
+- *Vanilla AlexNet outperforms other 2 models.*
+- *Resnet18 is too complex model for this dataset, thus rapidly overfits on train and performs poorly on test. It possibly may be used for CIFAR, but needs more regularization (both implicit and explicit).*
 
 *__Since AlexNet is the winner among 3 models, we would stick with this model for the further experiments__.*
 
@@ -96,6 +96,8 @@ To test whether Early stopping can speed-up training and improve model's perform
 
 ### Observations:
 
+- *EarlyStopping doesn't affect much model's performance on so few epochs, need to be tested on more epochs for further conclusions.*
+
 ## Experiment №3 [e0001, e0004] With / without Data Augmentation
 
 ### Motivation
@@ -105,6 +107,10 @@ To test whether Data Augmentation can improve model's performance and introduce 
 ### Training config
 
 - Same as in Experiment №1.
+- Data Augmentation:
+  - Horizontal flip
+  - Width shift 3 / 32
+  - Height shift 3 / 32
 
 ### Interpretation & Conclusion
 
@@ -119,6 +125,8 @@ To test whether Data Augmentation can improve model's performance and introduce 
 </p>
 
 ### Observations:
+
+- *__Data augmentation is probably the most important stage__, and carefully selected types of augmentation can improve performance a lot.
 
 ## Experiment №4 [e0004-e0005] With / without Batch Normalization
 
@@ -143,6 +151,7 @@ To test whether Batch Normalization can stabilize training process and reduce am
 </p>
 
 ### Observations:
+- *Batch normalization helps model to learn faster and thus by adding adding BN we got a little improvement in performance as well*.
 
 ## Experiment №5 [e0004, e0006-e0008] Different learning rates
 
@@ -168,6 +177,7 @@ To test what learning rate is the best for our set-up.
 </p>
 
 ### Observations:
+- *The default Adam learning rate works the best. Possibly, need to be further reduced with learning rate scheduler on later training epochs.*
 
 ## Experiment №6 [e0006, e0009-e0011] Different batch sizes
 
@@ -193,6 +203,7 @@ To test whether how much the correct choice of batch size affects model's perfor
 </p>
 
 ### Observations:
+- *To my surprise, batch size can also significantly affect the model's performance (+2% from worst to best on test set).*
 
 ## Experiment №7 [e0006, e0012-e0014] Different activation functions
 
@@ -218,6 +229,7 @@ To compare and find out what activations works best for our set-up.
 </p>
 
 ### Observations:
+- *The correct selection of activation function can also drastically change the final result (+9% from worst to best on test set).*
 
 ## Experiment №8 [e0006, e0015] Different weights initialization methods
 
@@ -242,6 +254,7 @@ To find out which weights initializer works best for our set-up.
 </p>
 
 ### Observations:
+- *There is no much difference between choosing weight initializer in our case, but maybe in other setups it could play bigger role.*
 
 ## Experiment №9 [e00019, e0020] With / without input data normalization + mean image subtraction
 
@@ -266,6 +279,7 @@ To check whether these additional pre-processing steps can speed-up training and
 </p>
 
 ### Observations:
+- *As could be seen from the plots, data normalization and mean image subtraction definely influence the model's training flow, it is much more stable and model is learning faster.*
 
 ## Experiment №10 [e0006, e0016-e0018] Different optimizers
 
@@ -291,6 +305,7 @@ To check how much optimizer affects the model's learning process.
 </p>
 
 ### Observations:
+- *The correct selection of optimizer can also drastically change the final result. I believe Stohastic Gradient Descent didn't work, because it requires more hyperparameters tuning, than other 2 optimizers (Adam, RMSProp) which showed good results.*
 
 ## Experiment №11 [e0020-e0021] With / without Learning rate scheduler
 
@@ -315,6 +330,7 @@ To check if learning rate scheduler can improve performance by gradually reducin
 </p>
 
 ### Observations:
+- *Even on such small amount of epochs as 30, learning rate scheduler shows that decreasing learning rate over time is a must-have to improve the model's learning on the later stages.*
 
 ## Experiment №12 [e0021-e0022] With / without Dropout
 
@@ -339,6 +355,7 @@ To check if additional regularization would improve model's performance on unsee
 </p>
 
 ### Observations:
+- *Since Dropout works as an regulizer for our model, the model is not so prone to overfit on the training data, and thus shows an improvement on the unseen (val and test sets).*
 
 ## Experiment №13 [e0023-e0025] Forming final model, based on the results of all previous experiments
 
@@ -380,7 +397,7 @@ To test how much we can improve our test accuracy against the results of the van
 
 ## Summary
 
-During conducting all these experiments, I have found out few things:
-- I have found what parts of model tweaking and data processing influence the model's performance on the unseen data and to the which extent.
-- I have successfuly improved the vanilla AlexNet 71.21% to 84.14& on test set (+ 13%) by iteratevely building final model taking into an account the results of the previous experiments.
-- I have learned something new for myself during all these experiments.
+During conducting all these experiments, __I have found out few things__:
+- *I have found __what parts of model tweaking and data processing influence the model's performance__ on the unseen data and to the which extent.*
+- *I have __successfuly improved__ the vanilla AlexNet __from 71.21% to 84.14% on test set (+ 13%)__ by iteratevely building final model taking into an account the results of the previous experiments.*
+- *__I have learned something new for myself__ during all these experiments.*
